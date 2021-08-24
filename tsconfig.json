@@ -1,17 +1,42 @@
 {
   "extends": "./node_modules/adonis-preset-ts/tsconfig",
-  "include": ["**/*"],
-  "exclude": ["node_modules", "build"],
+  "include": [
+    "**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "build"
+  ],
   "compilerOptions": {
     "outDir": "build",
     "rootDir": "./",
     "sourceMap": true,
     "paths": {
-      "App/*": ["./app/*"],
-      "Config/*": ["./config/*"],
-      "Contracts/*": ["./contracts/*"],
-      "Database/*": ["./database/*"]
+      "App/*": [
+        "./app/*"
+      ],
+      "Config/*": [
+        "./config/*"
+      ],
+      "Contracts/*": [
+        "./contracts/*"
+      ],
+      "Database/*": [
+        "./database/*"
+      ]
     },
-    "types": ["@adonisjs/core", "@adonisjs/repl"]
+    "types": [
+      "@adonisjs/core",
+      "@adonisjs/repl",
+      "@adonisjs/lucid"
+    ],
+    "target": "es2018",
+    "module": "commonjs",
+    "lib": [
+      "es2018",
+      "esnext.asynciterable"
+    ],
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
   }
 }
