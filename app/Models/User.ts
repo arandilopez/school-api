@@ -1,16 +1,12 @@
 import { DateTime } from 'luxon'
 import Hash from '@ioc:Adonis/Core/Hash'
-import {
-  column,
-  beforeSave,
-  BaseModel,
-} from '@ioc:Adonis/Lucid/Orm'
-import { Field, ID, ObjectType } from 'type-graphql'
+import { column, beforeSave, BaseModel } from '@ioc:Adonis/Lucid/Orm'
+import { Field, ObjectType } from 'type-graphql'
 
 @ObjectType()
 export default class User extends BaseModel {
   @column({ isPrimary: true })
-  @Field(_type => ID)
+  @Field()
   public id: number
 
   @column()

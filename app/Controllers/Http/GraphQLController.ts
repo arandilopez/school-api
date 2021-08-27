@@ -4,14 +4,28 @@ import { buildSchema } from 'type-graphql'
 import { resolvers } from 'App/Resolvers'
 
 export default class GraphQLController {
-  async execute({ request, response }: HttpContextContract) {
-    const schema = await buildSchema({ resolvers })
+  async execute(http: HttpContextContract) {
+    try {
+      return await this.graphql(http)
+    } catch (e) {
+      console.log(e)
 
-    const { query, variables } = request.all()
-    const context = {}
+      return http.response.status(500).json({ errors: [{ message: e.message, status: 500 }] })
+    }
+  }
 
-    const data = await graphql(schema, query, null, context, variables)
+  private async graphql(httpContext: HttpContextContract, context: any = {}) {
+    const schema = await this.buildSchema()
+    const { query, variables } = httpContext.request.all()
+    const result = await graphql(schema, query, null, context, variables)
 
-    return response.json(data)
+    return httpContext.response.json(result)
+  }
+
+  private async buildSchema() {
+    return await buildSchema({
+      resolvers,
+      scalarsMap: []
+    })
   }
 }
