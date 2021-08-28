@@ -1,10 +1,13 @@
 import { ApplicationContract } from '@ioc:Adonis/Core/Application'
+import { Schema } from '../app/GraphQL/Schema';
 
 export default class AppProvider {
-  constructor(protected app: ApplicationContract) {}
+  constructor(protected app: ApplicationContract) { }
 
   public register() {
-    // Register your own bindings
+    this.app.container.bind('App/GraphQL/Schema', () => {
+      return new Schema();
+    })
   }
 
   public async boot() {

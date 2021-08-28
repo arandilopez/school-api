@@ -24,9 +24,11 @@ export default class User extends BaseModel {
   public rememberMeToken?: string
 
   @column.dateTime({ autoCreate: true })
+  @Field()
   public createdAt: DateTime
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
+  @Field()
   public updatedAt: DateTime
 
   @beforeSave()
